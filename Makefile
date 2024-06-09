@@ -23,7 +23,7 @@ endef
 export HELP
 
 
-.PHONY: run install deploy update format lint clean help test
+.PHONY: run install deploy update pipeline format lint clean help test
 
 all help:
 	@echo "$$HELP"
