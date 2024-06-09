@@ -11,7 +11,7 @@ fi
 
 # check we have a name for the new package
 if [ -z "$1" ]; then
-    echo "Usage: $(basename "$0") <package-name>"
+    echo "Usage: $(basename "$0") packagename"
     exit 1
 fi
 
@@ -128,6 +128,7 @@ rm ${zipfn}
 
 echo "Installing ..."
 cd ${HOME}/src/${pkgname}
+git init
 make install
 make test
 
