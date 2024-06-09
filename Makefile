@@ -12,6 +12,7 @@ make run        - Run $(PROJECT_NAME) locally.
 make install    - Create local virtualenv & install dependencies.
 make deploy     - Set up project & run locally.
 make update     - Update dependencies via Poetry and output resulting `requirements.txt`.
+make pipeline   - Run code formatter & linter without making changes
 make format     - Run Python code formatter & sort dependencies.
 make lint       - Check code formatting with flake8.
 make clean      - Remove extraneous compiled files, caches, logs, etc.
@@ -58,6 +59,11 @@ update: env
 	poetry update --with dev && \
 	poetry export -f requirements.txt --output requirements.txt --without-hashes && \
 	echo Installed dependencies in \`${VIRTUAL_ENV}\`;
+
+.PHONY: pipeline
+pipeline: env lint
+	$(LOCAL_PYTHON) -m isort --multi-line=3 --check . && \
+	$(LOCAL_PYTHON) -m black . --check --quiet
 
 .PHONY: format
 format: env
